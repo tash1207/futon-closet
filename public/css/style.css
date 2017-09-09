@@ -1,0 +1,12 @@
+body {
+  padding-top: 50px;
+}
+
+h1 {
+  color: orange;
+}
+
+.container .jumbotron {
+  border-radius: 40px;
+}
+
