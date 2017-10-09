@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Node Sample App</title>
+  <title>Futon Closet</title>
 
   <!-- CSS -->
   <!-- load bootstrap and personal stylesheet -->
@@ -13,8 +13,18 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1>Heroku Node App!</h1>
-      <p>Let's see if this works<p>
+      <h1>Futon Closet</h1>
+      <p>The world's first closet-themed sleeping experience<p>
+    </div>
+    <div class="jumbotron">
+      <h2>Reviews</h2>
+      <ul>
+        <% for (var i = 0; i < reviews.length; i++) { %>
+          <li>
+            <p><%= reviews[i].text %><p>
+          </li>
+        <% } %>
+      </ul>
     </div>
   </div>
 </body>
