@@ -7,7 +7,7 @@ var MongoClient = mongodb.MongoClient;
 
 // Mongo variables
 var db;
-var url = process.env.MONGODB_URI;
+var url = process.env.MONGODB_URI || 'mongodb://localhost:27017/futoncloset';
 
 // Set the port of our application.
 // process.env.PORT lets the port be set by Heroku.
