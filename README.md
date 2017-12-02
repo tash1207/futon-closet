@@ -1,5 +1,5 @@
-# heroku-node
-Simple Node app to deploy on Heroku
+# futon-closet
+Based off the [heroku-node](https://github.com/tash1207/heroku-node) base repo
 
-Deployed to https://heroku-node-64131.herokuapp.com/
+Deployed to https://futon-closet.herokuapp.com/
 
