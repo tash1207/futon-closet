@@ -1,4 +1,3 @@
-var cool = require('cool-ascii-faces');
 var express = require('express');
 var mongodb = require('mongodb');
 
@@ -43,9 +42,3 @@ app.get('/', function(req, res) {
     res.render('index', {reviews: reviews});
   });
 });
-
-// Return a cool ascii face on the /cool route.
-app.get('/cool', function(req, res) {
-  res.send(cool());
-});
-

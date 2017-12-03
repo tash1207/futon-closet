@@ -1,12 +1,11 @@
 {
-  "name": "heroku-node",
-  "description": "Sample Node app to deploy on Heroku",
+  "name": "futon-closet",
+  "description": "Website for Futon Closet",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "cool-ascii-faces": "1.3.4",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mongodb": "^2.2.33"
