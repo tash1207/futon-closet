@@ -16,17 +16,27 @@
       <h1>Futon Closet</h1>
       <p>The world's first closet-themed sleeping experience<p>
     </div>
+
+    <% if (reviews.length > 0) { %>
+      <div class="jumbotron">
+        <h2>Reviews</h2>
+        <ul>
+          <% for (var i = 0; i < reviews.length; i++) { %>
+            <li>
+              <p><%= reviews[i].text %><p>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    <% } %>
+
     <div class="jumbotron">
-      <h2>Reviews</h2>
-      <ul>
-        <% for (var i = 0; i < reviews.length; i++) { %>
-          <li>
-            <p><%= reviews[i].text %><p>
-          </li>
-        <% } %>
-      </ul>
+      <h2>Leave a review!</h2>
+      <form method="post" action="/addReview">
+        <textarea type="text" name="reviewText" placeholder="Write your review here" cols="40" rows="5" maxlength="300" required></textarea>
+        <input type="submit" value="Submit">
+      </form>
     </div>
   </div>
 </body>
 </html>
-

@@ -1,5 +1,6 @@
 var express = require('express');
 var mongodb = require('mongodb');
+var bodyParser = require('body-parser');
 
 var app = express();
 var MongoClient = mongodb.MongoClient;
@@ -17,6 +18,8 @@ app.set('view engine', 'ejs');
 
 // Make express look in the public directory for assets (css/js/img).
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 MongoClient.connect(url, function (err, database) {
   if (err) {
@@ -41,4 +44,11 @@ app.get('/', function(req, res) {
     // ejs render automatically looks in the views folder.
     res.render('index', {reviews: reviews});
   });
+});
+
+app.post('/addReview', function(req, res) {
+  var reviewText = req.body.reviewText.substring(0, 300);
+  var col = db.collection('reviews');
+  col.insertOne({'text': reviewText});
+  res.redirect('/');
 });

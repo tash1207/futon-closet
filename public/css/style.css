@@ -6,7 +6,10 @@ h1 {
   color: orange;
 }
 
+input {
+	display: block;
+}
+
 .container .jumbotron {
   border-radius: 40px;
 }
-
