@@ -1,17 +1,17 @@
-var express = require('express');
-var mongodb = require('mongodb');
-var bodyParser = require('body-parser');
+const express = require('express');
+const mongodb = require('mongodb');
+const bodyParser = require('body-parser');
 
-var app = express();
-var MongoClient = mongodb.MongoClient;
+const app = express();
+const MongoClient = mongodb.MongoClient;
 
 // Mongo variables
-var db;
-var url = process.env.MONGODB_URI || 'mongodb://localhost:27017/futoncloset';
+let db;
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/futoncloset';
 
 // Set the port of our application.
 // process.env.PORT lets the port be set by Heroku.
-var port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 // Set the view engine to ejs.
 app.set('view engine', 'ejs');
@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-MongoClient.connect(url, function (err, database) {
+MongoClient.connect(url, (err, database) => {
   if (err) {
     console.log('Unabled to connect to mongoDB. Error:', err);
   } else {
@@ -30,25 +30,26 @@ MongoClient.connect(url, function (err, database) {
     db = database;
 
     // Only listen if the db is connected.
-    app.listen(port, function() {
+    app.listen(port, () => {
       console.log('App is running on http://localhost:' + port);
     });
   }
 });
 
 // Set the home page route.
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   // Get the info from the database.
-  var col = db.collection('reviews');
-  col.find().toArray(function(err, reviews) {
+  const col = db.collection('reviews');
+  col.find().toArray((err, reviews) => {
+    const recentReviews = reviews.reverse();
     // ejs render automatically looks in the views folder.
-    res.render('index', {reviews: reviews});
+    res.render('index', {reviews: recentReviews.slice(0, 7)});
   });
 });
 
-app.post('/addReview', function(req, res) {
-  var reviewText = req.body.reviewText.substring(0, 300);
-  var col = db.collection('reviews');
+app.post('/addReview', (req, res) => {
+  const reviewText = req.body.reviewText.substring(0, 300);
+  const col = db.collection('reviews');
   col.insertOne({'text': reviewText});
   res.redirect('/');
 });
