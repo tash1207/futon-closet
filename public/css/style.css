@@ -1,15 +1,22 @@
-body {
-  padding-top: 50px;
-}
-
-h1 {
-  color: orange;
-}
-
 input {
 	display: block;
 }
 
+.background {
+	background-image: url(http://tashawych.co/images/FutonClosetBackground.jpg);
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+.container {
+	padding-top: 50px;
+}
+
 .container .jumbotron {
-  border-radius: 40px;
+	border-radius: 32px;
+}
+
+.jumbotron {
+	opacity: 0.9;
 }
