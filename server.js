@@ -48,8 +48,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/addReview', (req, res) => {
+  const reviewAuthor = req.body.reviewAuthor.substring(0, 30);
   const reviewText = req.body.reviewText.substring(0, 300);
   const col = db.collection('reviews');
-  col.insertOne({'text': reviewText});
+  col.insertOne({'author': reviewAuthor, 'text': reviewText});
   res.redirect('/');
 });

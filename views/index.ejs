@@ -22,9 +22,13 @@
         <div class="jumbotron">
           <h2>Reviews</h2>
           <ul>
-            <% for (var i = 0; i < reviews.length; i++) { %>
+            <% for (const review of reviews) { %>
               <li>
-                <p><%= reviews[i].text %><p>
+                <p><%= review.text %>
+                <% if (review.author) { %>
+                  - <%= review.author %>
+                <% } %>
+                <p>
               </li>
             <% } %>
           </ul>
@@ -34,6 +38,7 @@
       <div class="jumbotron">
         <h2>Leave a review!</h2>
         <form method="post" action="/addReview">
+          <input type="text" name="reviewAuthor" placeholder="Name" maxLength="30">
           <textarea type="text" name="reviewText" placeholder="Write your review here" cols="40" rows="5" maxlength="300" required></textarea>
           <input type="submit" value="Submit">
         </form>
