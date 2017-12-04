@@ -2,6 +2,11 @@ input {
 	display: block;
 }
 
+input[type="text"] {
+	margin-bottom: 4px;
+	width: 302px;
+}
+
 .background {
 	background-image: url(http://tashawych.co/images/FutonClosetBackground.jpg);
 	background-position: center top;
