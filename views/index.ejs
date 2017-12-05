@@ -43,7 +43,27 @@
           <input type="submit" value="Submit">
         </form>
       </div>
+
+      <div class="jumbotron">
+        <h2>Location</h2>
+        <div id="map"></div>
+      </div>
     </div>
   </div>
+  <script>
+  function initMap() {
+    const latLng = {lat: 37.40535, lng: -122.01485};
+    const map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 9,
+      center: latLng
+    });
+    const marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+  }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD42geKjQgyiZl4aPTNd-ph7-V_0OZj8co&callback=initMap">
+  </script>
 </body>
 </html>

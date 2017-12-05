@@ -7,6 +7,11 @@ input[type="text"] {
 	width: 302px;
 }
 
+#map {
+  height: 400px;
+  width: 100%;
+}
+
 .background {
 	background-image: url(http://tashawych.co/images/FutonClosetBackground.jpg);
 	background-position: center top;
