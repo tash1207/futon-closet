@@ -27,6 +27,37 @@ input[type="text"] {
 	background-size: 100% auto;
 }
 
+.columnLayout {
+	display: flex;
+}
+
+.column {
+	flex: 1;
+	margin-left: 12px;
+	margin-right: 12px;
+}
+
+.column > img {
+	display: none;
+	height: 300px;
+	margin: auto;
+	width: 300px;
+}
+
+.column2 {
+	display: none;
+}
+
+@media screen and (min-width: 660px) {
+	.column > img {
+		display: inherit;
+	}
+
+	.column2 {
+		display: inherit;
+	}
+}
+
 .container {
 	padding-top: 50px;
 }
