@@ -12,7 +12,18 @@ input[type="text"] {
 }
 
 .jumbotron li > p {
+	cursor: pointer;
+	display: inline;
 	font-size: 20px;
+	line-height: 2;
+}
+
+.jumbotron li > p:hover {
+	text-decoration: underline;
+}
+
+#amenity {
+	border: white 4px ridge;
 }
 
 #map {
