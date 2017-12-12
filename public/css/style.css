@@ -7,21 +7,6 @@ input[type="text"] {
 	width: 302px;
 }
 
-.jumbotron p {
-	font-size: 18px;
-}
-
-.jumbotron li > p {
-	cursor: pointer;
-	display: inline;
-	font-size: 20px;
-	line-height: 2;
-}
-
-.jumbotron li > p:hover {
-	text-decoration: underline;
-}
-
 #amenity {
 	border: white 4px ridge;
 }
@@ -29,6 +14,16 @@ input[type="text"] {
 #map {
 	height: 400px;
 	width: 100%;
+}
+
+.amenity-list > li > p {
+	cursor: pointer;
+	display: inline;
+	line-height: 2;
+}
+
+.amenity-list > li > p:hover {
+	text-decoration: underline;
 }
 
 .background {
@@ -79,4 +74,12 @@ input[type="text"] {
 
 .jumbotron {
 	opacity: 0.9;
+}
+
+.jumbotron p {
+	font-size: 18px;
+}
+
+.jumbotron li > p {
+	font-size: 20px;
 }
