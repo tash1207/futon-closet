@@ -8,7 +8,6 @@
   <!-- load bootstrap and personal stylesheet -->
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-
 </head>
 <body>
   <div class="background">
@@ -23,13 +22,19 @@
         <div class="columnLayout">
           <div class="column">
             <ul>
-              <li><p onclick="showChromecast()">Chromecast<p></li>
-              <li><p onclick="showChocolate()">Complimentary Chocolate*<p></li>
-              <li><p onclick="showTowels()">Fresh Towels*<p></li>
-              <li><p onclick="showGwen()">Gwen Magazines<p></li>
-              <li><p onclick="showHangers()">Hangers<p></li>
-              <li><p onclick="showBenji()">Pet Friendly<p></li>
-              <li><p onclick="showXbox()">XBOX<p></li>
+              <li>
+                <p onclick="showImage('fc-chromecast.jpg')">Chromecast<p>
+              </li>
+              <li>
+                <p onclick="showImage('fc-chocolate.jpg')">
+                  Complimentary Chocolate*
+                <p>
+              </li>
+              <li><p onclick="showImage('fc-towels.jpg')">Fresh Towels*<p></li>
+              <li><p onclick="showImage('fc-gwen.jpg')">Gwen Magazines<p></li>
+              <li><p onclick="showImage('fc-hangers.jpg')">Hangers<p></li>
+              <li><p onclick="showImage('fc-benji.jpg')">Pet Friendly<p></li>
+              <li><p onclick="showImage('fc-xbox.jpg')">XBOX<p></li>
             </ul>
             * Only included on stays of greater than 1 night
           </div>
@@ -73,54 +78,8 @@
       </div>
     </div>
   </div>
-  <script>
-  function preloadImages(imageUrls) {
-    for (const imageUrl of imageUrls) {
-      const img = new Image();
-      const urlRoot = "http://tashawych.co/images/";
-      img.src = urlRoot + imageUrl;
-    }
-  }
-  preloadImages(["fc-benji.jpg", "fc-chocolate.jpg", "fc-chromecast.jpg",
-    "fc-gwen.jpg", "fc-hangers.jpg", "fc-towels.jpg", "fc-xbox.jpg"]);
-  </script>
-  <script>
-  const x = document.getElementById("amenity");
-  function showBenji() {
-    x.src = "http://tashawych.co/images/fc-benji.jpg";
-  }
-  function showChocolate() {
-    x.src = "http://tashawych.co/images/fc-chocolate.jpg";
-  }
-  function showChromecast() {
-    x.src = "http://tashawych.co/images/fc-chromecast.jpg";
-  }
-  function showGwen() {
-    x.src = "http://tashawych.co/images/fc-gwen.jpg";
-  }
-  function showHangers() {
-    x.src = "http://tashawych.co/images/fc-hangers.jpg";
-  }
-  function showTowels() {
-    x.src = "http://tashawych.co/images/fc-towels.jpg";
-  }
-  function showXbox() {
-    x.src = "http://tashawych.co/images/fc-xbox.jpg";
-  }
-  </script>
-  <script>
-  function initMap() {
-    const latLng = {lat: 37.40535, lng: -122.01485};
-    const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 9,
-      center: latLng
-    });
-    const marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-  }
-  </script>
+  <script src="js/scripts.js"></script>
+  <script>preloadImages();</script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD42geKjQgyiZl4aPTNd-ph7-V_0OZj8co&callback=initMap">
   </script>
 </body>
