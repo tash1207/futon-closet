@@ -7,12 +7,8 @@ input[type="text"] {
 	width: 302px;
 }
 
-.jumbotron p {
-	font-size: 18px;
-}
-
-.jumbotron li > p {
-	font-size: 20px;
+#amenity {
+	border: white 4px ridge;
 }
 
 #map {
@@ -20,11 +16,52 @@ input[type="text"] {
 	width: 100%;
 }
 
+.amenity-list > li > p {
+	cursor: pointer;
+	display: inline;
+	line-height: 2;
+}
+
+.amenity-list > li > p:hover {
+	text-decoration: underline;
+}
+
 .background {
 	background-image: url(http://tashawych.co/images/FutonClosetBackground.jpg);
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: 100% auto;
+}
+
+.columnLayout {
+	display: flex;
+}
+
+.column {
+	flex: 1;
+	margin-left: 12px;
+	margin-right: 12px;
+}
+
+.column > img {
+	display: none;
+	height: 300px;
+	margin: auto;
+	width: 300px;
+}
+
+.column2 {
+	display: none;
+}
+
+@media screen and (min-width: 660px) {
+	.column > img {
+		display: inherit;
+	}
+
+	.column2 {
+		display: inherit;
+	}
 }
 
 .container {
@@ -37,4 +74,12 @@ input[type="text"] {
 
 .jumbotron {
 	opacity: 0.9;
+}
+
+.jumbotron p {
+	font-size: 18px;
+}
+
+.jumbotron li > p {
+	font-size: 20px;
 }

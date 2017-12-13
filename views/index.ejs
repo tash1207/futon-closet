@@ -8,7 +8,6 @@
   <!-- load bootstrap and personal stylesheet -->
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-
 </head>
 <body>
   <div class="background">
@@ -16,6 +15,33 @@
       <div class="jumbotron">
         <h1>Futon Closet</h1>
         <h3>The world's first closet-themed sleeping experience</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h2>Amenities</h2>
+        <div class="columnLayout">
+          <div class="column">
+            <ul class="amenity-list">
+              <li>
+                <p onclick="showImage('fc-chromecast.jpg')">Chromecast<p>
+              </li>
+              <li>
+                <p onclick="showImage('fc-chocolate.jpg')">
+                  Complimentary Chocolate*
+                <p>
+              </li>
+              <li><p onclick="showImage('fc-towels.jpg')">Fresh Towels*<p></li>
+              <li><p onclick="showImage('fc-gwen.jpg')">Gwen Magazines<p></li>
+              <li><p onclick="showImage('fc-hangers.jpg')">Hangers<p></li>
+              <li><p onclick="showImage('fc-benji.jpg')">Pet Friendly<p></li>
+              <li><p onclick="showImage('fc-xbox.jpg')">XBOX<p></li>
+            </ul>
+            * Only included on stays of greater than 1 night
+          </div>
+          <div class="column column2">
+            <img id="amenity" src="http://tashawych.co/images/fc-chromecast.jpg" />
+          </div>
+        </div>
       </div>
 
       <% if (reviews.length > 0) { %>
@@ -52,19 +78,8 @@
       </div>
     </div>
   </div>
-  <script>
-  function initMap() {
-    const latLng = {lat: 37.40535, lng: -122.01485};
-    const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 9,
-      center: latLng
-    });
-    const marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-  }
-  </script>
+  <script src="js/scripts.js"></script>
+  <script>preloadImages();</script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD42geKjQgyiZl4aPTNd-ph7-V_0OZj8co&callback=initMap">
   </script>
 </body>
