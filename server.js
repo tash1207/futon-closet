@@ -38,12 +38,18 @@ MongoClient.connect(url, (err, database) => {
 
 // Set the home page route.
 app.get('/', (req, res) => {
+  const reviewSubmitted = req.query.reviewSubmitted;
+  const robotCodeFailed = req.query.robotCodeFailed;
   // Get the info from the database.
   const col = db.collection('reviews');
   col.find().toArray((err, reviews) => {
     const recentReviews = reviews.reverse();
     // ejs render automatically looks in the views folder.
-    res.render('index', {reviews: recentReviews.slice(0, 7)});
+    res.render('index', {
+      reviews: recentReviews.slice(0, 7),
+      reviewSubmitted: reviewSubmitted,
+      robotCodeFailed: robotCodeFailed
+    });
   });
 });
 
@@ -52,5 +58,22 @@ app.post('/addReview', (req, res) => {
   const reviewText = req.body.reviewText.substring(0, 300);
   const col = db.collection('reviews');
   col.insertOne({'author': reviewAuthor, 'text': reviewText});
-  res.redirect('/');
+  res.redirect('/?reviewSubmitted=true');
+});
+
+app.post('/bookReservation', (req, res) => {
+  const robotCode = req.body.robotCode;
+  if (robotCode == '12345') {
+    const name = req.body.reservationName.substring(0, 50);
+    const email = req.body.reservationEmail.substring(0, 50);
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const col = db.collection('reservations');
+    // TODO: Check that it isn't already booked.
+    col.insertOne({'startDate': startDate, 'endDate': endDate, 'name': name,
+      'email': email, 'confirmed': false});
+    res.redirect('/');
+  } else {
+    res.redirect('/?robotCodeFailed=true');
+  }
 });

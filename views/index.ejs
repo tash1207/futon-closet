@@ -68,6 +68,9 @@
           <textarea type="text" name="reviewText" placeholder="Write your review here" cols="40" rows="5" maxlength="300" required></textarea>
           <input type="submit" value="Submit">
         </form>
+        <% if (reviewSubmitted) { %>
+          <div>Thanks for the review!</div>
+        <% } %>
       </div>
 
       <div class="jumbotron">
@@ -75,6 +78,27 @@
         <p>Futon Closet is located in Sunnyvale, California.<p>
         <p>Conveniently down the street from a VTA stop, guests can take the VTA to the Mountain View Caltrain Station and get to San Francisco in an hour and a half. Or rent a car and be in SF in just 45 minutes.<p>
         <div id="map"></div>
+      </div>
+
+      <div class="jumbotron">
+        <h2>Book your stay now!</h2>
+        <p><em>*still in beta*</em></p>
+        <form method="post" action="/bookReservation">
+          <p>Name<p>
+          <input type="text" name="reservationName" maxLength="50" required>
+          <p>Email<p>
+          <input type="text" name="reservationEmail" maxLength="50" required>
+          <p>Check-in<p>
+          <input type="date" name="startDate" required>
+          <p>Check-out<p>
+          <input type="date" name="endDate" required>
+          <p>Please type 12345 below to prove you aren't a robot<p>
+          <input type="text" name="robotCode" maxLength="5" required>
+          <input type="submit" value="Submit">
+          <% if (robotCodeFailed) { %>
+            <div>Are you a robot?</div>
+          <% } %>
+        </form>
       </div>
     </div>
   </div>
