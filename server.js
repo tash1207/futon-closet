@@ -69,10 +69,23 @@ app.post('/bookReservation', (req, res) => {
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
     const col = db.collection('reservations');
-    // TODO: Check that it isn't already booked.
-    col.insertOne({'startDate': startDate, 'endDate': endDate, 'name': name,
-      'email': email, 'confirmed': false});
-    res.redirect('/');
+
+    const overlappingCriteria = {
+      'confirmed': true,
+      'startDate' : {$lte : endDate},
+      'endDate' : {$gte : startDate}
+    };
+    col.find(overlappingCriteria).toArray((err, overlappingReservations) => {
+      if (overlappingReservations.length > 0) {
+        // TODO: Inform user that those dates are already reserved.
+        return;
+      }
+      // Did not find an overlapping reservation.
+      col.insertOne({'startDate': startDate, 'endDate': endDate, 'name': name,
+        'email': email, 'confirmed': false});
+      // TODO: Inform user that we have received their reservation request.
+      res.redirect('/');
+    });
   } else {
     res.redirect('/?robotCodeFailed=true');
   }
