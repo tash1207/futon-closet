@@ -1,85 +1,85 @@
 input {
-	display: block;
+  display: block;
 }
 
 input[type="text"] {
-	margin-bottom: 4px;
-	width: 302px;
+  margin-bottom: 4px;
+  width: 302px;
 }
 
 #amenity {
-	border: white 4px ridge;
+  border: white 4px ridge;
 }
 
 #map {
-	height: 400px;
-	width: 100%;
+  height: 400px;
+  width: 100%;
 }
 
 .amenity-list > li > p {
-	cursor: pointer;
-	display: inline;
-	line-height: 2;
+  cursor: pointer;
+  display: inline;
+  line-height: 2;
 }
 
 .amenity-list > li > p:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .background {
-	background-image: url(http://tashawych.co/images/FutonClosetBackground.jpg);
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-size: 100% auto;
+  background-image: url(http://tashawych.co/images/FutonClosetBackground.jpg);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 
 .columnLayout {
-	display: flex;
+  display: flex;
 }
 
 .column {
-	flex: 1;
-	margin-left: 12px;
-	margin-right: 12px;
+  flex: 1;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .column > img {
-	display: none;
-	height: 300px;
-	margin: auto;
-	width: 300px;
+  display: none;
+  height: 300px;
+  margin: auto;
+  width: 300px;
 }
 
 .column2 {
-	display: none;
+  display: none;
 }
 
 @media screen and (min-width: 660px) {
-	.column > img {
-		display: inherit;
-	}
+  .column > img {
+    display: inherit;
+  }
 
-	.column2 {
-		display: inherit;
-	}
+  .column2 {
+    display: inherit;
+  }
 }
 
 .container {
-	padding-top: 50px;
+  padding-top: 50px;
 }
 
 .container .jumbotron {
-	border-radius: 32px;
+  border-radius: 32px;
 }
 
 .jumbotron {
-	opacity: 0.9;
+  opacity: 0.9;
 }
 
 .jumbotron p {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .jumbotron li > p {
-	font-size: 20px;
+  font-size: 20px;
 }

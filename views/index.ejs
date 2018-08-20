@@ -6,7 +6,8 @@
 
   <!-- CSS -->
   <!-- load bootstrap and personal stylesheet -->
-  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css"
+        rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -65,7 +66,8 @@
         <h2>Leave a review!</h2>
         <form method="post" action="/addReview">
           <input type="text" name="reviewAuthor" placeholder="Name" maxLength="30">
-          <textarea type="text" name="reviewText" placeholder="Write your review here" cols="40" rows="5" maxlength="300" required></textarea>
+          <textarea type="text" name="reviewText" placeholder="Write your review here" cols="40"
+                    rows="5" maxlength="300" required></textarea>
           <input type="submit" value="Submit">
         </form>
         <% if (reviewSubmitted) { %>
@@ -76,7 +78,9 @@
       <div class="jumbotron">
         <h2>Location</h2>
         <p>Futon Closet is located in Sunnyvale, California.<p>
-        <p>Conveniently down the street from a VTA stop, guests can take the VTA to the Mountain View Caltrain Station and get to San Francisco in an hour and a half. Or rent a car and be in SF in just 45 minutes.<p>
+        <p>Conveniently down the street from a VTA stop, guests can take the VTA to the Mountain
+           View Caltrain Station and get to San Francisco in an hour and a half. Or rent a car and
+           be in SF in just 45 minutes.<p>
         <div id="map"></div>
       </div>
 
