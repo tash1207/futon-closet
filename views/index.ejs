@@ -89,9 +89,10 @@
           <p>Email<p>
           <input type="text" name="reservationEmail" maxLength="50" required>
           <p>Check-in<p>
-          <input type="date" name="startDate" required>
+          <input id="reservationStartDate" type="date" name="startDate"
+                 onchange="updateDateInputs()"required>
           <p>Check-out<p>
-          <input type="date" name="endDate" required>
+          <input id="reservationEndDate" type="date" name="endDate" required>
           <p>Please type 12345 below to prove you aren't a robot<p>
           <input type="text" name="robotCode" maxLength="5" required>
           <input type="submit" value="Submit">
@@ -103,7 +104,7 @@
     </div>
   </div>
   <script src="js/scripts.js"></script>
-  <script>preloadImages();</script>
+  <script>setUpPage();</script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD42geKjQgyiZl4aPTNd-ph7-V_0OZj8co&callback=initMap">
   </script>
 </body>
