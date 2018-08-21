@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Futon Closet</title>
+
+  <!-- CSS -->
+  <!-- load bootstrap and personal stylesheet -->
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css"
+        rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="background">
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Futon Closet</h1>
+        <h3>The world's first closet-themed sleeping experience</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h2>Reservation Booking Status</h2>
+        <% if (reservationSuccess) { %>
+          <p>Success!</p>
+          <p>Your reservation request has been received. We will contact you shortly to let you
+             know if your reservation is confirmed.</p>
+        <% } else if (reservationOverlap) { %>
+          <p>Oh no! Someone else beat you to it!</p>
+          <p>The dates you chose have already been booked. Please try again with different dates
+             or contact the owner to see if there is room in either of our sister properties Bonus
+             Room and Futon Living Room.</p>
+        <% } else { %>
+          <p>Uh oh!</p>
+          <p>There was an error submitting your booking request. Please try again.</p>
+        <% } %>
+        <a href="/">Go back to main page.</a>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

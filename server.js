@@ -38,12 +38,29 @@ MongoClient.connect(url, (err, database) => {
 
 // Set the home page route.
 app.get('/', (req, res) => {
+  const reviewSubmitted = req.query.reviewSubmitted;
+  const robotCodeFailed = req.query.robotCodeFailed;
   // Get the info from the database.
   const col = db.collection('reviews');
   col.find().toArray((err, reviews) => {
     const recentReviews = reviews.reverse();
     // ejs render automatically looks in the views folder.
-    res.render('index', {reviews: recentReviews.slice(0, 7)});
+    res.render('index', {
+      reviews: recentReviews.slice(0, 7),
+      reviewSubmitted: reviewSubmitted,
+      robotCodeFailed: robotCodeFailed
+    });
+  });
+});
+
+// Page shown after user attempts to book a reservation.
+app.get('/bookingStatus', (req, res) => {
+  const reservationSuccess = req.query.reservationSuccess;
+  const reservationOverlap = req.query.reservationOverlap;
+  // ejs render automatically looks in the views folder.
+  res.render('bookingstatus', {
+    reservationSuccess: reservationSuccess,
+    reservationOverlap: reservationOverlap
   });
 });
 
@@ -52,5 +69,43 @@ app.post('/addReview', (req, res) => {
   const reviewText = req.body.reviewText.substring(0, 300);
   const col = db.collection('reviews');
   col.insertOne({'author': reviewAuthor, 'text': reviewText});
-  res.redirect('/');
+  res.redirect('/?reviewSubmitted=true');
+});
+
+app.post('/bookReservation', (req, res) => {
+  const robotCode = req.body.robotCode;
+  if (robotCode != '12345') {
+    res.redirect('/?robotCodeFailed=true');
+  } else {
+    const name = req.body.reservationName.substring(0, 50);
+    const email = req.body.reservationEmail.substring(0, 50);
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const col = db.collection('reservations');
+
+    const overlappingCriteria = {
+      'confirmed': true,
+      'startDate' : {$lte : endDate},
+      'endDate' : {$gte : startDate}
+    };
+    col.find(overlappingCriteria).toArray((err, overlappingReservations) => {
+      if (overlappingReservations.length > 0) {
+        res.redirect('/bookingStatus?reservationOverlap=true');
+        return;
+      }
+      // We did not find an overlapping reservation.
+      try {
+        col.insertOne({
+          'startDate': startDate,
+          'endDate': endDate,
+          'name': name,
+          'email': email,
+          'confirmed': false
+        });
+        res.redirect('/bookingStatus?reservationSuccess=true');
+      } catch (e) {
+        res.redirect('/bookingStatus');
+      }
+    });
+  }
 });
