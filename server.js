@@ -65,10 +65,13 @@ app.get('/bookingStatus', (req, res) => {
 });
 
 app.post('/addReview', (req, res) => {
-  const reviewAuthor = req.body.reviewAuthor.substring(0, 30);
-  const reviewText = req.body.reviewText.substring(0, 300);
-  const col = db.collection('reviews');
-  col.insertOne({'author': reviewAuthor, 'text': reviewText});
+  const reviewAuthor = req.body['reviewAuthor'].substring(0, 30);
+  const reviewText = req.body['reviewText'].substring(0, 300);
+  const recaptcha = req.body['g-recaptcha-response'];
+  if (recaptcha) {
+    const col = db.collection('reviews');
+    col.insertOne({'author': reviewAuthor, 'text': reviewText});
+  }
   res.redirect('/?reviewSubmitted=true');
 });
 
