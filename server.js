@@ -1,3 +1,4 @@
+const Request = require('request');
 const express = require('express');
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser');
@@ -8,6 +9,10 @@ const MongoClient = mongodb.MongoClient;
 // Mongo variables
 let db;
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/futoncloset';
+
+// Captcha variables
+const recaptchaSecret = '6Ld-JosUAAAAAD-hGsfZdvR7G5xj5UptXNFGOHe9';
+const recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
 // Set the port of our application.
 // process.env.PORT lets the port be set by Heroku.
@@ -39,7 +44,6 @@ MongoClient.connect(url, (err, database) => {
 // Set the home page route.
 app.get('/', (req, res) => {
   const reviewSubmitted = req.query.reviewSubmitted;
-  const robotCodeFailed = req.query.robotCodeFailed;
   // Get the info from the database.
   const col = db.collection('reviews');
   col.find().toArray((err, reviews) => {
@@ -48,7 +52,6 @@ app.get('/', (req, res) => {
     res.render('index', {
       reviews: recentReviews.slice(0, 7),
       reviewSubmitted: reviewSubmitted,
-      robotCodeFailed: robotCodeFailed
     });
   });
 });
@@ -64,21 +67,40 @@ app.get('/bookingStatus', (req, res) => {
   });
 });
 
+// Page shown after user fails a captcha.
+app.get('/badRobot', (req, res) => {
+  // ejs render automatically looks in the views folder.
+  res.render('badrobot');
+});
+
 app.post('/addReview', (req, res) => {
   const reviewAuthor = req.body['reviewAuthor'].substring(0, 30);
   const reviewText = req.body['reviewText'].substring(0, 300);
-  const recaptcha = req.body['g-recaptcha-response'];
-  if (recaptcha) {
-    const col = db.collection('reviews');
-    col.insertOne({'author': reviewAuthor, 'text': reviewText});
+  const recaptchaResponse = req.body['g-recaptcha-response'];
+  if (recaptchaResponse) {
+    let recaptchaFullUrl = recaptchaUrl;
+    recaptchaFullUrl += '?secret=' + recaptchaSecret;
+    recaptchaFullUrl += '&response=' + recaptchaResponse;
+    recaptchaFullUrl += '&remoteip=' + req.connection.remoteAddress;
+    Request(recaptchaFullUrl, (error, resp, body) => {
+      body = JSON.parse(body);
+        if (!body.success) {
+            res.redirect('/badRobot');
+        } else {
+          const col = db.collection('reviews');
+          col.insertOne({'author': reviewAuthor, 'text': reviewText});
+          res.redirect('/?reviewSubmitted=true');
+        }
+    });
+  } else {
+    res.redirect('/badRobot');
   }
-  res.redirect('/?reviewSubmitted=true');
 });
 
 app.post('/bookReservation', (req, res) => {
   const robotCode = req.body.robotCode;
   if (robotCode != '12345') {
-    res.redirect('/?robotCodeFailed=true');
+    res.redirect('/badRobot');
   } else {
     const name = req.body.reservationName.substring(0, 50);
     const email = req.body.reservationEmail.substring(0, 50);
