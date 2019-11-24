@@ -14,7 +14,17 @@
   <div class="container">
     <div class="jumbotron">
       <h2>Is the parking pass available?</h2>
-      <h1>YES</h1>
+      <% if (parkingPassAvailable) { %>
+        <h1>YES</h1>
+        <form method="post" action="/takeParkingPass">
+          <input class="parkingPassButton" type="submit" value="Take Parking Pass">
+        </form>
+      <% } else { %>
+        <h1>NO</h1>
+        <form method="post" action="/returnParkingPass">
+          <input class="parkingPassButton" type="submit" value="Return Parking Pass">
+        </form>
+      <% } %>
     </div>
   </div>
 </body>

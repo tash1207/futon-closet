@@ -75,8 +75,12 @@ app.get('/bookingStatus', (req, res) => {
 
 // Page for displaying parking pass status.
 app.get('/parkingPass', (req, res) => {
-  // ejs render automatically looks in the views folder.
-  res.render('parkingpass');
+  db.collection('parkingPass').findOne().then(parkingPassInfo => {
+    // ejs render automatically looks in the views folder.
+    res.render('parkingpass', {
+     parkingPassAvailable: parkingPassInfo.available,
+   });
+  });
 });
 
 app.post('/addReview', (req, res) => {
@@ -139,4 +143,14 @@ app.post('/bookReservation', (req, res) => {
       }
     });
   }
+});
+
+app.post('/returnParkingPass', (req, res) => {
+  db.collection('parkingPass').updateOne({}, {$set : {'available' : true}});
+  res.redirect('/parkingPass');
+});
+
+app.post('/takeParkingPass', (req, res) => {
+  db.collection('parkingPass').updateOne({}, {$set : {'available' : false}});
+  res.redirect('/parkingPass');
 });

@@ -83,3 +83,11 @@ input[type="text"] {
 .jumbotron li > p {
   font-size: 20px;
 }
+
+.parkingPassButton {
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 12px;
+}
