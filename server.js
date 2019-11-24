@@ -56,6 +56,12 @@ app.get('/', (req, res) => {
   });
 });
 
+// Page shown after user fails a captcha.
+app.get('/badRobot', (req, res) => {
+  // ejs render automatically looks in the views folder.
+  res.render('badrobot');
+});
+
 // Page shown after user attempts to book a reservation.
 app.get('/bookingStatus', (req, res) => {
   const reservationSuccess = req.query.reservationSuccess;
@@ -67,10 +73,10 @@ app.get('/bookingStatus', (req, res) => {
   });
 });
 
-// Page shown after user fails a captcha.
-app.get('/badRobot', (req, res) => {
+// Page for displaying parking pass status.
+app.get('/parkingPass', (req, res) => {
   // ejs render automatically looks in the views folder.
-  res.render('badrobot');
+  res.render('parkingpass');
 });
 
 app.post('/addReview', (req, res) => {
