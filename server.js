@@ -26,13 +26,13 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-MongoClient.connect(url, (err, database) => {
+MongoClient.connect(url, { useUnifiedTopology: true }, (err, database) => {
   if (err) {
     console.log('Unabled to connect to mongoDB. Error:', err);
   } else {
     console.log('Connection established to', url);
 
-    db = database;
+    db = database.db('futon-closet');
 
     // Only listen if the db is connected.
     app.listen(port, () => {
