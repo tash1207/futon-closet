@@ -6,9 +6,9 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "ejs": "^2.5.7",
-    "express": "^4.16.2",
-    "mongodb": "^2.2.33",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.4",
     "request": "^2.88.0"
   }
 }
